@@ -12,7 +12,12 @@ This builder supports incremental builds.
 
 Image Stream
 ------------
-The builder can be imported into OpenShift using the file at [image-streams-grails2.json](https://bitbucket.org/double16/openshift-s2i-grails2/raw/c5874a40a94877513e3c4ab3099f2ef2bee68c0b/image-streams-grails2.json)
+The builder can be imported into OpenShift using the file at [image-streams-grails2.json](https://bitbucket.org/double16/openshift-s2i-grails2/raw/9e2cd965dfc451d67470133e85b834f56776fda5/image-streams-grails2.json) using the OpenShift CLI:
+
+```shell
+oc login # Use admin credentials
+oc create -f image-streams-grails2.json -n openshift
+```
 
 Credits
 -------
