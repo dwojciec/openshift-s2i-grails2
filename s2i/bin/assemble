@@ -1,0 +1,54 @@
+#!/bin/bash -e
+#
+# S2I assemble script for the 'new-s2i' image.
+# The 'assemble' script builds your application source ready to run.
+#
+# For more information refer to the documentation:
+#   https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
+#
+
+if [ "$1" = "-h" ]; then
+    exec /usr/libexec/s2i/usage
+fi
+
+base_path=${HOME}
+source_path=${base_path}/source
+artifact_path=${base_path}
+export JAVA_HOME=/usr/lib/jvm/java
+
+if [[ $OPENSHIFT_BUILD_COMMIT ]]; then
+ 	echo "---> Found information about git commit used for build ($OPENSHIFT_BUILD_COMMIT). Storing in ${source_path}/version"
+        mkdir -p ${source_path}
+	echo "$OPENSHIFT_BUILD_COMMIT" > ${source_path}/version
+else
+	echo "---> Could not find git commit information. (Supported in Origin 3.1)"
+fi
+
+# Restore artifacts from the previous build (if they exist).
+if [ -d "/tmp/artifacts" ]; then
+  echo "---> Restoring saved artifacts from prior build..."
+  if [[ -d "/tmp/artifacts/.grails" ]]; then
+      mkdir -p ${artifact_path}/.grails
+      cp -a /tmp/artifacts/.grails/* ${artifact_path}/.grails/
+  fi
+  if [[ -d "/tmp/artifacts/.m2" ]]; then
+      mkdir -p ${artifact_path}/.m2
+      cp -a /tmp/artifacts/.m2/* ${artifact_path}/.m2
+  fi
+fi
+
+echo "---> Installing application source to ${source_path}"
+cp -Rf /tmp/src/. ${source_path}
+
+pushd ${source_path} > /dev/null
+echo "---> Building application from source in $(pwd)"
+./grailsw test-app
+
+if [[ -e ./bin/cleanup ]]; then
+	echo "---> Running application provided cleanup"
+	./bin/cleanup
+fi
+
+echo "---> Build completed"
+
+popd > /dev/null

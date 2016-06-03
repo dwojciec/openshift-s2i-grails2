@@ -1,0 +1,35 @@
+{
+  "kind": "ImageStreamList",
+  "apiVersion": "v1",
+  "metadata": {
+
+  },
+  "items": [
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "grails2",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "tags": [
+          {
+            "name": "latest",
+            "annotations": {
+              "description": "Build and run Grails 2.x applications",
+              "iconClass": "icon-openjdk",
+              "tags": "builder,grails,java",
+              "supports": "java",
+              "sampleRepo": "https://bitbucket.org/double16/CukeBooks.git"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "pdouble16/openshift-s2i-grails2:latest"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
