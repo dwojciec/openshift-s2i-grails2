@@ -19,6 +19,10 @@ oc login # Use admin credentials
 oc create -f image-streams-grails2.json -n openshift
 ```
 
+PhantomJS
+---------
+[PhantomJS](http://phantomjs.org) 2.1.1 is installed at `/usr/local/bin/phantomjs` for use with functional testing.
+
 Credits
 -------
 
