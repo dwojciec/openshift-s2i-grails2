@@ -4,7 +4,7 @@ openshift-s2i-grails2
 OpenShift S2I builder image for projects using the Grails 2.x framework.
 
 Runs the application in production mode using the embedded web server. Requires use
-of the Gradle wrapper. This means the particular version of
+of the Grails wrapper. This means the particular version of
 Grails you want to use will be downloaded on-demand. This builder has
 OpenJava 1.8.0 installed on CentOS 7.
 
