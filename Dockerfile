@@ -1,4 +1,4 @@
-FROM pdouble16/openshift-s2i-browser-base:latest
+FROM pdouble16/openshift-s2i-browser-base:0.1
 MAINTAINER "Patrick Double <pat@patdouble.com>"
 
 LABEL io.k8s.description="Builder for Grails 2.x Applications" \
