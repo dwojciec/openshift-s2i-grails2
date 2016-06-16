@@ -11,7 +11,7 @@ USER root
 # Some proxies will get in the way here, so increasing to avoid time out errors
 RUN echo "timeout=200" >> /etc/yum.conf
 RUN yum update -y && yum install -y java-1.8.0-openjdk-devel nc netstat fontconfig bzip2 && yum clean all -y
-RUN curl --location --fail https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 | tar xjfO - phantomjs-2.1.1-linux-x86_64/bin/phantomjs > /usr/local/bin/phantomjs && chmod +x /usr/local/bin/phantomjs
+RUN curl --location --fail https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 | tar xjfO - phantomjs-2.1.1-linux-x86_64/bin/phantomjs > /usr/bin/phantomjs && chmod +x /usr/bin/phantomjs
 
 LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i
 COPY ./s2i/bin/ /usr/libexec/s2i
