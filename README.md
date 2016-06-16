@@ -19,12 +19,11 @@ oc login # Use admin credentials
 oc create -f image-streams-grails2.json -n openshift
 ```
 
-PhantomJS
----------
-[PhantomJS](http://phantomjs.org) 2.1.1 is installed at `/usr/local/bin/phantomjs` for use with functional testing.
+Functional Tests
+----------------
+Firefox, Google Chrome and PhantomJS are available for testing. See https://bitbucket.org/double16/openshift-s2i-browser-base for details.
 
 Credits
 -------
-
 Based on work by https://github.com/anderssv/openshift-sti-java-8
 
