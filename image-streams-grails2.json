@@ -25,7 +25,10 @@
             },
             "from": {
               "kind": "DockerImage",
-              "name": "pdouble16/openshift-s2i-grails2:latest"
+              "name": "docker.io/pdouble16/openshift-s2i-grails2:latest"
+            },
+            "importPolicy": {
+              "scheduled": true
             }
           }
         ]
