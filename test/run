@@ -69,8 +69,7 @@ prepare() {
 }
 
 run_test_application() {
-  #docker run --rm --cidfile=${cid_file} -p ${test_port} ${IMAGE_NAME}-testapp
-  docker run --rm --cidfile=${cid_file} -p ${test_port}:${test_port} ${IMAGE_NAME}-testapp
+  docker run --rm --cidfile=${cid_file} -p ${test_port} ${IMAGE_NAME}-testapp
 }
 
 cleanup() {
@@ -119,14 +118,15 @@ test_connection() {
   local sleep_time=3
   local attempt=1
   local result=1
+  local exposed_test_port=$(docker port $(cat $cid_file) ${test_port}/tcp | cut -d ":" -f 2)
   while [ $attempt -le $max_attempts ]; do
-    echo "Sending GET request to http://$(container_ip):${test_port}/"
+    echo "Sending GET request to http://$(container_ip):${exposed_test_port}/"
     if (echo "$OSTYPE" | egrep -qs 'darwin'); then
       echo "Warning for OSX users: if you can't access the container's IP ${container_ip} directly (because you use boot2docker for example)"
       echo "you should run the curl command in a container, for example using:"
-      echo "docker run --rm -it sequenceiq/alpine-curl curl -s -w %{http_code} -o /dev/null http://$(container_ip):${test_port}/"
+      echo "docker run --rm -it sequenceiq/alpine-curl curl -s -w %{http_code} -o /dev/null http://$(container_ip):${exposed_test_port}/"
     fi
-    response_code=$(curl -s -w %{http_code} -o /dev/null http://$(container_ip):${test_port}/)
+    response_code=$(docker run --rm -it sequenceiq/alpine-curl curl -s -w %{http_code} -o /dev/null http://$(container_ip):${exposed_test_port}/)
     status=$?
     if [ $status -eq 0 ]; then
       if [ $response_code -eq 200 ]; then
