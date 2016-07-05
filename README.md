@@ -23,6 +23,13 @@ Functional Tests
 ----------------
 Firefox, Google Chrome and PhantomJS are available for testing. See https://bitbucket.org/double16/openshift-s2i-browser-base for details.
 
+Pre-Installed Wrappers
+----------------------
+Wrappers for the following versions of Grails are included in the image:
+* 2.5.5
+* 2.4.5
+* 2.3.11
+
 Credits
 -------
 Based on work by https://github.com/anderssv/openshift-sti-java-8

@@ -13,8 +13,7 @@ fi
 
 base_path=${HOME}
 source_path=${base_path}/source
-artifact_path=${base_path}
-export JAVA_HOME=/usr/lib/jvm/java
+artifact_path=${GRAILS_HOME}
 
 if [[ $OPENSHIFT_BUILD_COMMIT ]]; then
  	echo "---> Found information about git commit used for build ($OPENSHIFT_BUILD_COMMIT). Storing in ${source_path}/version"
@@ -42,7 +41,7 @@ cp -Rf /tmp/src/. ${source_path}
 
 pushd ${source_path} > /dev/null
 echo "---> Building application from source in $(pwd)"
-./grailsw test-app
+./grailsw ${GRAILS_TEST_OPTS} test-app
 
 if [[ -e ./bin/cleanup ]]; then
 	echo "---> Running application provided cleanup"

@@ -7,19 +7,15 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
-export JAVA_HOME=/usr/lib/jvm/java
-
-pushd ${HOME}/source
-echo "---> Starting s2i application in $(pwd) on $(date)"
+cd ${HOME}/source
+echo "---> Starting s2i application in $(pwd) on $(date), HOME=${HOME}"
 
 HOST=${OPENSHIFT_DIY_IP:-0.0.0.0}
 PORT=${OPENSHIFT_DIY_PORT:-8080}
 
-./grailsw \
+exec bash -x ./grailsw \
    -Dgrails.server.host=${HOST} -Dserver.port=${PORT} \
    -Dapp.context=/ \
    ${JAVA_OPTS} \
    prod run-app
 
-echo "---> Application stopped $(date)"
-popd
