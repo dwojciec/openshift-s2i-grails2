@@ -15,7 +15,7 @@
       "spec": {
         "tags": [
           {
-            "name": "0.1.2",
+            "name": "0.2.2",
             "annotations": {
               "description": "Build and run Grails 2.x applications",
               "iconClass": "icon-openjdk",
@@ -25,7 +25,7 @@
             },
             "from": {
               "kind": "DockerImage",
-              "name": "docker.io/pdouble16/openshift-s2i-grails2:0.1.2"
+              "name": "docker.io/pdouble16/openshift-s2i-grails2:0.2.2"
             },
             "importPolicy": {
               "scheduled": true
