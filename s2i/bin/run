@@ -8,12 +8,20 @@
 #
 
 cd ${HOME}/source
-echo "---> Starting s2i application in $(pwd) on $(date), HOME=${HOME}"
+
+export USER_ID=$(id -u)
+export GROUP_ID=$(id -g)
+envsubst < /opt/passwd.template > /tmp/passwd
+export LD_PRELOAD=libnss_wrapper.so
+export NSS_WRAPPER_PASSWD=/tmp/passwd
+export NSS_WRAPPER_GROUP=/etc/group
+
+echo "---> Starting s2i application in $(pwd) on $(date), HOME=${HOME}, UID=${USER_ID}"
 
 HOST=${OPENSHIFT_DIY_IP:-0.0.0.0}
 PORT=${OPENSHIFT_DIY_PORT:-8080}
 
-exec bash -x ./grailsw \
+exec ./grailsw -noreloading \
    -Dgrails.server.host=${HOST} -Dserver.port=${PORT} \
    -Dapp.context=/ \
    ${JAVA_OPTS} \

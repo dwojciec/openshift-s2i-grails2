@@ -36,6 +36,7 @@ grails.project.dependency.resolution = {
         inherits true // Whether to inherit repository definitions from plugins
 
         if (System.getenv("GRAILS_REPO")) {
+           System.err.println "Adding repo ${System.getenv("GRAILS_REPO")}"
            mavenRepo System.getenv("GRAILS_REPO")
         }
 

@@ -48,6 +48,9 @@ if [[ -e ./bin/cleanup ]]; then
 	./bin/cleanup
 fi
 
+find "${base_path}" -type d -print0 | xargs -0 chmod a+rwx
+find "${base_path}" -type f -print0 | xargs -0 chmod a+rw
+
 echo "---> Build completed"
 
 popd > /dev/null

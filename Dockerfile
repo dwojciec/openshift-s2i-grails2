@@ -11,7 +11,7 @@ USER root
 
 # Some proxies will get in the way here, so increasing to avoid time out errors
 RUN echo "timeout=200" >> /etc/yum.conf
-RUN yum install -y java-1.8.0-openjdk-devel nc netstat && yum clean all -y
+RUN yum install -y java-1.8.0-openjdk-devel nc netstat nss_wrapper gettext && yum clean all -y
 
 # Install expected versions of Grails 2.x
 ENV GRAILS_HOME=/opt/app-root/src JAVA_HOME=/usr/lib/jvm/java
@@ -28,6 +28,9 @@ USER root
 LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i
 COPY ./s2i/bin/ /usr/libexec/s2i
 RUN chmod a+x /usr/libexec/s2i/*
+
+# Copy password template
+COPY ./passwd.template /opt/
 
 USER 1001
 
