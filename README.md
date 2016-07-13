@@ -26,9 +26,9 @@ Firefox, Google Chrome and PhantomJS are available for testing. See https://bitb
 Pre-Installed Wrappers
 ----------------------
 Wrappers for the following versions of Grails are included in the image:
-* 2.5.5
-* 2.4.5
-* 2.3.11
+- 2.5.5
+- 2.4.5
+- 2.3.11
 
 Credits
 -------
