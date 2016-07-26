@@ -82,7 +82,7 @@ cleanup() {
     fi
   fi
   if image_exists ${IMAGE_NAME}-testapp; then
-    docker rmi ${IMAGE_NAME}-testapp
+    docker rmi -f ${IMAGE_NAME}-testapp
   fi
 }
 
