@@ -9,6 +9,9 @@
 # IMAGE_NAME specifies a name of the candidate image used for testing.
 # The image has to be available before this script is executed.
 #
+
+source "$(dirname $0)/sh2ju.sh"
+
 IMAGE_NAME=${IMAGE_NAME-test-builder-candidate}
 
 # Determining system utility executables (darwin compatibility check)
@@ -126,7 +129,11 @@ test_connection() {
       echo "you should run the curl command in a container, for example using:"
       echo "docker run --rm -it sequenceiq/alpine-curl curl -s -w %{http_code} -o /dev/null http://$(container_ip):${exposed_test_port}/"
     fi
-    response_code=$(docker run --rm -it sequenceiq/alpine-curl curl -s -w %{http_code} -o /dev/null http://$(container_ip):${exposed_test_port}/)
+    if [ -z "$DOCKER_MACHINE_NAME" ]; then
+      response_code=$(curl -s -w %{http_code} -o /dev/null http://$(container_ip):${test_port}/)
+    else
+      response_code=$(docker run --rm -it sequenceiq/alpine-curl curl -s -w %{http_code} -o /dev/null http://$(container_ip):${exposed_test_port}/)
+    fi
     status=$?
     if [ $status -eq 0 ]; then
       if [ $response_code -eq 200 ]; then
@@ -143,11 +150,11 @@ test_connection() {
 # Build the application image twice to ensure the 'save-artifacts' and
 # 'restore-artifacts' scripts are working properly
 prepare
-run_s2i_build
+juLog 'run_s2i_build'
 check_result $?
 
 # Verify the 'usage' script is working properly
-test_usage
+juLog 'test_usage'
 check_result $?
 
 # Verify that the HTTP connection can be established to test application container
@@ -156,7 +163,7 @@ run_test_application &
 # Wait for the container to write its CID file
 wait_for_cid
 
-test_connection
+juLog 'test_connection'
 check_result $?
 
 cleanup

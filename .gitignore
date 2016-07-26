@@ -2,3 +2,4 @@
 .grails
 target
 .vagrant
+results/
