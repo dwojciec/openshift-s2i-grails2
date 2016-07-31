@@ -1,4 +1,4 @@
-openshift-s2i-grails2
+openshift-s2i-grails2 [![CircleCI](https://circleci.com/bb/double16/openshift-s2i-grails2.svg?style=svg&circle-token=b9585f0ebd8f51d40cfef08e931ff0ec76fc0a76)](https://circleci.com/bb/double16/openshift-s2i-grails2)
 =====================
 
 OpenShift S2I builder image for projects using the Grails 2.x framework.
