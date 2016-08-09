@@ -11,7 +11,7 @@
 ### These reports can be used in Hudson, or any other CI.
 ###
 ### Usage:
-###     - Include this file in your shell script
+###     - source this file in your shell script
 ###     - Use juLog to call your command any time you want to produce a new report
 ###        Usage:   juLog <options> command arguments
 ###           options:
@@ -121,7 +121,7 @@ $out
   "
   ## testsuite block
   cat <<EOF > "$juDIR/TEST-$suite.xml"
-  <testsuite failures="0" assertions="$assertions" name="$suite" tests="1" errors="$errors" time="$total">
+  <testsuite failures="0" assertions="$asserts" name="$suite" tests="1" errors="$errors" time="$total">
     $content
   </testsuite>
 EOF
