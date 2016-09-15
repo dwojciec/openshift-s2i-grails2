@@ -1,11 +1,24 @@
 FROM pdouble16/openshift-s2i-browser-base:0.2.1
 MAINTAINER "Patrick Double <pat@patdouble.com>"
 
+ARG BUILD_DATE
+ARG SOURCE_COMMIT
+ARG DOCKERFILE_PATH
+ARG SOURCE_TYPE
+
 LABEL io.k8s.description="Builder for Grails 2.x Applications" \
       io.k8s.display-name="Grails 2.x" \
       io.openshift.expose-services="8080:http" \
       io.openshift.tags="builder,grails,java" \
-      io.openshift.min-memory="1Gi"
+      io.openshift.min-memory="1Gi" \
+      org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.docker.dockerfile="$DOCKERFILE_PATH/Dockerfile" \
+      org.label-schema.license="GPLv2" \
+      org.label-schema.name="Builder for Grails 2.x Applications" \
+      org.label-schema.url="https://bitbucket.org/double16/openshift-s2i-grails2" \
+      org.label-schema.vcs-ref=$SOURCE_COMMIT \
+      org.label-schema.vcs-type="$SOURCE_TYPE" \
+      org.label-schema.vcs-url="https://bitbucket.org/double16/openshift-s2i-grails2.git"
 
 USER root
 
