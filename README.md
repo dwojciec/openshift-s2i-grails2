@@ -9,8 +9,6 @@ of the Grails wrapper. This means the particular version of
 Grails you want to use will be downloaded on-demand. This builder has
 OpenJava 1.8.0 installed on CentOS 7.
 
-Browsers are included for functional testing: Google Chrome, Firefox and PhantomJS. These come from the [openshift-s2i-browser-base](https://hub.docker.com/r/pdouble16/openshift-s2i-browser-base/) image.
-
 This builder supports incremental builds.
 
 Image Stream
