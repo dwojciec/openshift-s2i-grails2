@@ -1,4 +1,4 @@
-FROM pdouble16/openshift-s2i-browser-base:0.2.1
+FROM pdouble16/openshift-s2i-browser-base:0.3
 MAINTAINER "Patrick Double <pat@patdouble.com>"
 
 ARG BUILD_DATE
